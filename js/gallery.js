@@ -38,9 +38,27 @@ function swapPhoto() {
     //Access the img element and replace its source
     //with a new image from your images array which is loaded 
     //from the JSON string
+    //$(".photoHolder").attr('src', '../img/places');
     //Makes sure it loops the images
-  
+    if (mCurrentIndex > mImages.length - 1) {
+        mCurrentIndex = 0;
+    } else if (mCurrentIndex < 0) {
+        mCurrentIndex = mImages.length - 1;
+
+    }
+    console.log(mCurrentIndex)
+
+    //changes html to add image descriptions
+    $('#slideShow .photoHolder img').attr('src', mImages[mCurrentIndex].imgPath);
+    $('#slideShow .details .location').text("Location: " + mImages[mCurrentIndex].imgLocation);
+    $('#slideShow .details .description ').text("Description: " + mImages[mCurrentIndex].description);
+    $('#slideShow .details .date ').text("Date: " + mImages[mCurrentIndex].date);
+
+    console.log(mImages[mCurrentIndex].imgPath);
+    console.log('swap photo');
+    mCurrentIndex++;
 }
+
 
 
 // Counter for the mImages array
@@ -61,7 +79,7 @@ var mJson;
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mURL = "jsonfile_name";
+var mURL = "images.json";
 
 
 
@@ -109,3 +127,18 @@ function galleryImage(imgLocation, description, date, imgPath)
 
 
 //Creates Galley Image Objects from JSON file, pushes objects into mImages array
+function reqListener() 
+{
+    console.log(JSON.parse(this.responseText));
+    var mJson = JSON.parse(this.responseText);
+    for (var i = 0; i < mJson.images.length; i++) {
+        var current = mJson.images[i];
+        var imageDetails = new galleryImage(current.imgLocation, current.description, current.date, current.imgPath);
+        mImages.push(imageDetails);
+
+    }
+}
+
+mRequest.addEventListener("load", reqListener);
+mRequest.open("GET", mURL);
+mRequest.send();
