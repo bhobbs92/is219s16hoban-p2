@@ -14,26 +14,38 @@ body {
 	border-radius: 2px;
 }	
 
-#slideShow {	
+#slideShow {
+    width: 80%;
 	position: relative;
 }
 
 .photoHolder {
 	position: relative;
-	width: 80%;
+	
 	margin: 0 auto;
 }
 
-.moreIndicator {
+.moreIndicator  {
+  
 	height: 50px;
 	width: 50px;
-	position: absolute;
+    position:relative;  
+    left:290px;
 	z-index: 3;
 	opacity: .8;
-	top: 0px;
+	top: -70px;
+    -ms-transform: rotate(30deg); /* IE 9 */
+    -webkit-transform: rotate(30deg); /* Chrome, Safari, Opera */
+    transform: rotate(30deg);
+  -webkit-transition: -webkit-transform 1.8s ease-in-out;
+  transition: transform 1.8s ease-in-out;
 }
 
+
+
 .thumbnail {
+  align-content: center;
+  width: 125%;
 	position: relative;
 	box-shadow: 1px 3px 20px 0px;
 }
@@ -45,24 +57,51 @@ body {
 }
 
 #nav {
+    width: 125%;
 	clear: both;
 	position: relative;
 }
 
 #prevPhoto {
+  
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+  
 	height: 42px;
 	width: 42px;
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+
+#prevPhoto:hover{
+  opacity: .4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+  
 }
 
 #nextPhoto {
+  
+   opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+   float: right;
 	height: 42px;
 	width: 42px;
 }
 
+#nextPhoto:hover{
+  opacity: .4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+  
+}
+
 .details p {
+  align-content: center;
 	margin-top: 20px;
 }
 .details {
+   width: 120%;
+  align-content: center;
 	border: 1px #000 dashed;
 	padding: 0px 10px;
 	margin: 20px 0px;
@@ -70,12 +109,50 @@ body {
 
 /*Add CSS styles to rotate the element 90deg
 Make it animate nicely. You'll need CSS3 for this*/
-.rot90 {}
+
+.rot90 {
+  -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+  -webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+
+}
 
 /*Add CSS styles to rotate the element 180deg
 Make it animate nicely. You'll need CSS3 for this*/
-.rot180 {}
+.rot180 {
+  -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+  -webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+}
 
 /*Add CSS styles to rotate the element 270deg
 Make it animate nicely. You'll need CSS3 for this*/
-.rot270 {}
+.rot270{
+  -ms-transform: rotate(270deg); /* IE 9 */
+    -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+    transform: rotate(270deg);
+  -webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+}

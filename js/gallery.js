@@ -31,8 +31,32 @@ function animate() {
 }
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
-
-
+//toggle to show details
+$(document).ready(function(){
+  //use event delegation
+  $(document).on('click','.moreIndicator',function(){
+    var $this= $(this);
+    $('.details').toggle(function(){
+    
+   });
+  });
+});
+//rotate on click
+var clicked = false;
+$(document).ready(function(){
+  var deg = clicked ? 90 : 180;
+$('.moreIndicator').click(function(){
+   var deg = clicked ? 90 : 270;
+    $(this).css({
+    "transform":"rotate("+deg+"deg)",
+    "-webkit-transform": "rotate("+deg+"deg)",
+    "-moz-transform": "rotate("+deg+"deg)",
+    "-ms-transform": "rotate("+deg+"deg)",
+    "-o-transform": "rotate("+deg+"deg)"
+    });
+  clicked = !clicked;
+ 
+})});
 function swapPhoto() {
     //Add code here to access the #slideShow element.
     //Access the img element and replace its source
@@ -57,9 +81,35 @@ function swapPhoto() {
     console.log(mImages[mCurrentIndex].imgPath);
     console.log('swap photo');
     mCurrentIndex++;
+  
+//  $(document).ready(function(){
+//  //var arr = [mImages];
+//  var index = 0;
+//  $(document).on('click', function(){ 
+//    $('#nextPhoto ').; 
+//    index = (mCurrentIndex + 1) % mImages.length ;
+// });
+//     console.log('help');
+//});
+
+}
+function nextQuestion(){
+    document.getElementById("nextPhoto").innerHTML = mImages[mCurrentIndex];
+    mCurrentIndex ++;
 }
 
-
+//$(document).ready(function(){
+//  //use event delegation
+//  $(document).on('click','#nextPhoto',function(){
+//    var len = mImages.length;
+//
+//var current = mImages[mCurrentIndex];
+//var previous = mImages[(mCurrentIndex+len-1)%len];
+//var next = mImages[(mCurrentIndex+1)%len];
+//    console.log('help'); 
+//  
+//});
+//});
 
 // Counter for the mImages array
 var mCurrentIndex = 0;
@@ -85,29 +135,39 @@ var mURL = "images.json";
 
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
 //@param A GalleryImage object. Use this method for an event handler for loading a gallery Image object (optional).
-//function makeGalleryImageOnloadCallback(galleryImage) 
-//{
-//	return function(e) 
-//    {
-//		galleryImage.img = e.target;
-//		mImages.push(galleryImage);
-//	}
-//}
-//
-//$(document).ready( function() 
-//{
-//	
-//	// This initially hides the photos' metadata information
-//	$('.details').eq(0).hide();
-//	
-//});
-//
-//window.addEventListener('load', function(galleryImage) 
-//{
-//	
-//	console.log('window loaded');
-//
-//}, false);
+function makeGalleryImageOnloadCallback(galleryImage) 
+{
+	return function(e) 
+    {
+		galleryImage.img = e.target;
+		mImages.push(galleryImage);
+	}
+}
+
+$(document).ready( function() 
+{
+	
+	// This initially hides the photos' metadata information
+	$('.details').eq(0).hide();
+  
+   $("#nextPhoto").click(function () {
+        swapPhoto()
+    });
+
+    $("#prevPhoto").click(function () {
+        mCurrentIndex = mCurrentIndex - 2;
+        swapPhoto()
+    });
+
+	
+});
+
+window.addEventListener('load', function(galleryImage) 
+{
+	
+	console.log('window loaded');
+
+}, false);
 
 
 function galleryImage(imgLocation, description, date, imgPath) 
@@ -136,9 +196,44 @@ function reqListener()
         var imageDetails = new galleryImage(current.imgLocation, current.description, current.date, current.imgPath);
         mImages.push(imageDetails);
 
-    }
+//    
+//$(document).ready(function(){
+//  //var arr = [mImages];
+//  var index = 0;
+//  $('#nextPhoto').click(function(){ 
+//    $('#slideShow .photoHolder img ').html(mImages[mCurrentIndex]); 
+//    index = (mCurrentIndex + 1) % mImages.length ;
+// });
+//});
+
+}
 }
 
 mRequest.addEventListener("load", reqListener);
 mRequest.open("GET", mURL);
 mRequest.send();
+
+
+//var extraURL= "exta.json";
+//function ExtrareqListener() 
+//{
+// 
+//$(document).ready(function () {
+//$('#get-data').click(function () {
+//  //
+//  $.getJSON(extraURL, function (data) {
+//    
+//    for (var i = 0; i < extraURL.images.length; i++) {
+//        var current = extraURL.images[i];
+//        var imageDetails = new galleryImage(current.imgLocation, current.description, current.date, current.imgPath);
+//        mImages.push(imageDetails);
+//
+//    }
+//    console.log(data);
+//  });
+//});
+//});
+//}
+//mRequest.addEventListener("load", ExtrareqListener);
+//mRequest.open("GET", extraURL);
+//mRequest.send();
