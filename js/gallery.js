@@ -62,7 +62,6 @@ function swapPhoto() {
     //Access the img element and replace its source
     //with a new image from your images array which is loaded 
     //from the JSON string
-    //$(".photoHolder").attr('src', '../img/places');
     //Makes sure it loops the images
     if (mCurrentIndex > mImages.length - 1) {
         mCurrentIndex = 0;
@@ -82,15 +81,6 @@ function swapPhoto() {
     console.log('swap photo');
     mCurrentIndex++;
   
-//  $(document).ready(function(){
-//  //var arr = [mImages];
-//  var index = 0;
-//  $(document).on('click', function(){ 
-//    $('#nextPhoto ').; 
-//    index = (mCurrentIndex + 1) % mImages.length ;
-// });
-//     console.log('help');
-//});
 
 }
 function nextQuestion(){
@@ -98,18 +88,6 @@ function nextQuestion(){
     mCurrentIndex ++;
 }
 
-//$(document).ready(function(){
-//  //use event delegation
-//  $(document).on('click','#nextPhoto',function(){
-//    var len = mImages.length;
-//
-//var current = mImages[mCurrentIndex];
-//var previous = mImages[(mCurrentIndex+len-1)%len];
-//var next = mImages[(mCurrentIndex+1)%len];
-//    console.log('help'); 
-//  
-//});
-//});
 
 // Counter for the mImages array
 var mCurrentIndex = 0;
@@ -129,7 +107,18 @@ var mJson;
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mURL = "images.json";
+//var mURL = location.search.replace(/\?json=/g, '') || "images.json";
+if (location.search.length) {
+  mURL = location.search.replace(/\?json=/g, '');
+  var validJsonFile = new RegExp(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*\.json/);
+
+  if (!validJsonFile.test(mURL)) {
+    mURL = 'images-short.json';
+  }
+} else {
+  mURL = 'images.json';
+}
+//var mURL = "extra.json";
 
 
 
@@ -196,44 +185,24 @@ function reqListener()
         var imageDetails = new galleryImage(current.imgLocation, current.description, current.date, current.imgPath);
         mImages.push(imageDetails);
 
-//    
-//$(document).ready(function(){
-//  //var arr = [mImages];
-//  var index = 0;
-//  $('#nextPhoto').click(function(){ 
-//    $('#slideShow .photoHolder img ').html(mImages[mCurrentIndex]); 
-//    index = (mCurrentIndex + 1) % mImages.length ;
-// });
-//});
+
 
 }
 }
 
 mRequest.addEventListener("load", reqListener);
 mRequest.open("GET", mURL);
+mRequest.onreadystatechange = function () {
+  var me = this;
+
+  if (me.readyState === 4) {
+    if (me.status === 404) {
+      mURL = 'images.json';
+      mRequest.open('GET', mURL);
+      mRequest.send();
+    }
+  }
+}
 mRequest.send();
 
 
-//var extraURL= "exta.json";
-//function ExtrareqListener() 
-//{
-// 
-//$(document).ready(function () {
-//$('#get-data').click(function () {
-//  //
-//  $.getJSON(extraURL, function (data) {
-//    
-//    for (var i = 0; i < extraURL.images.length; i++) {
-//        var current = extraURL.images[i];
-//        var imageDetails = new galleryImage(current.imgLocation, current.description, current.date, current.imgPath);
-//        mImages.push(imageDetails);
-//
-//    }
-//    console.log(data);
-//  });
-//});
-//});
-//}
-//mRequest.addEventListener("load", ExtrareqListener);
-//mRequest.open("GET", extraURL);
-//mRequest.send();
