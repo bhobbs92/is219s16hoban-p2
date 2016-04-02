@@ -1,0 +1,34 @@
+{
+    "images": [
+        {
+            "imgPath": "img/sharks/shark1.jpg",
+            "imgLocation": "Off the Coast of Cap Cod ",
+            "description": "Great White Shark ",
+            "date": "08/01/2014"
+        },
+        {
+            "imgPath": "img/sharks/shark2.jpg",
+            "imgLocation": "Ningaloo Reef Western Australia",
+            "description": "Whale Shark",
+            "date": "07/31/2011"
+        },
+        {
+            "imgPath": "img/sharks/shark3.jpg",
+            "imgLocation": "Bahamas",
+            "description": "Tiger Shark",
+            "date": "05/11/2015"
+        },
+    {
+      "imgPath": "img/sharks/shark4.jpg",
+      "imgLocation": "Costa Rica ",
+      "description": "Hammerhead Shark",
+      "date": "06/27/2014"
+    },
+      {
+      "imgPath": "img/sharks/shark5.jpg",
+      "imgLocation": "California",
+      "description": "Shortfin Mako Shark",
+      "date": "06/03/2013"
+    }
+  ]
+}
